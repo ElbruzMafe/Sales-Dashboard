@@ -1,4 +1,7 @@
-# Front-End Assessment Project – Sales Dashboard
+#  Sales Dashboard –  Front-End Project Completed in 3 Hours
+
+You can set your data and see its graph.
+
 
 ## Technologies Used
 - Next.js 15
@@ -24,6 +27,7 @@ npm install
 npm run dev
 ```
 Open your browser at http://localhost:3000/dashboard to view the project.
+Or use Vercel https://https-public.vercel.app/
 
 <!--
 ## Future Improvements
