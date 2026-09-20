@@ -1,54 +1,70 @@
-#  Sales Dashboard –  Front-End Project Completed in 3 Hours
+# Sales Dashboard
 
-You can set your data and see its graph.
+A small Next.js dashboard that charts mock yearly sales figures, with a minimum
+threshold filter and a switch between bar, line and pie views.
 
+I built this in an afternoon as a front-end assessment, and kept it around because
+it is a compact example of how I lay out a React codebase: components split by
+responsibility rather than by page, chart state kept in one place, and no state
+library for something this size.
 
-## Technologies Used
-- Next.js 15
-- TypeScript
-- Tailwind CSS
-- Recharts
+## Live demo
 
-## Project Overview
-This project is a simple sales dashboard built with Next.js.  
-It uses mock sales data for the years 2022, 2023, and 2024.  
-Users can filter sales by setting a minimum sales threshold and switch between different chart types (bar, line, pie).
+https://https-public.vercel.app
 
 ## Features
-- Components structured with atomic design principles  
-- Display of sales data using mock data  
-- Filter by minimum sales threshold  
-- Switch between Bar, Line, and Pie chart types  
-- Responsive and user-friendly UI  
 
-## How to Run
+- Mock sales data for 2022, 2023 and 2024
+- Filter rows out by a minimum sales threshold
+- Switch between bar, line and pie charts without reloading
+- Components organised along atomic design lines (`molecules/` for the filter
+  input, `organisms/` for the chart plus its controls)
+- Charts resize with the viewport via Recharts' `ResponsiveContainer`
+
+## Tech stack
+
+Next.js 15 (App Router), React 19, TypeScript, Tailwind CSS 4, Recharts.
+
+## Running it
+
 ```bash
 npm install
 npm run dev
 ```
-Open your browser at http://localhost:3000/dashboard to view the project.
-Or use Vercel https://https-public.vercel.app/
 
-<!--
-## Future Improvements
-Projeye eklenebilecek geliştirmeler veya iyileştirmeler.
--->Future Improvements
+Then open http://localhost:3000 — the dashboard is the root route.
 
-Integration with real API data
+To check the production build:
 
-Additional chart types
+```bash
+npm run build
+npm run start
+```
 
-More advanced filtering options
+## Project structure
 
+```
+.
+├── app/
+│   ├── layout.tsx              # root layout, pulls in globals.css
+│   ├── page.tsx                # the dashboard route
+│   └── globals.css             # Tailwind entry point
+└── src/
+    ├── components/
+    │   ├── molecules/SalesFilter.tsx    # threshold input
+    │   └── organisms/SalesChart.tsx     # chart type switch + rendering
+    └── data/salesData.ts       # the mock dataset
+```
 
-<!--
-## Author
-ElbruzMafe
--->Author
+`@/*` resolves to `src/*`, which is why the route files sit at the top level and
+everything they import lives under `src/`.
 
-@ElbruzMafe
+## Known limitations
 
-
----
-
-This project was created for assessment purposes.
+- The data is hardcoded in `src/data/salesData.ts`. There is no API layer, so
+  "filtering" is an array filter, not a query.
+- Only three data points, one series. The pie chart in particular is doing very
+  little work with three slices.
+- The threshold input accepts any number and silently ignores non-numeric input
+  rather than showing a validation message.
+- No tests.
